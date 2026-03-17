@@ -1,7 +1,5 @@
 from django.db import models
-from apps.save.models import Save, Create
-from apps.pin.models import Pin
-from apps.chat.models import Chat
+
 # Create your models here.
 
 
@@ -32,16 +30,16 @@ class Profile(models.Model):
         BUSINESS_PROFILE = 'business_profile', 'business_profile'
         PRIVATE_PROFILE = 'private_profile', 'private_profile'
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    save = models.ForeignKey(Save, on_delete=models.CASCADE)
-    create = models.ForeignKey(Create, on_delete=models.CASCADE)
-    pin = models.ForeignKey(Pin, on_delete=models.CASCADE)
-    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+    save = models.ForeignKey('save.Save', on_delete=models.CASCADE, null=True, blank=True)
+    create = models.ForeignKey('save.Create', on_delete=models.CASCADE, null=True, blank=True)
+    pin = models.ForeignKey('pin.Pin', on_delete=models.CASCADE, null=True, blank=True)
+    chat = models.ForeignKey('chat.Chat', on_delete=models.CASCADE,)
     describtion = models.TextField()
     image = models.ImageField(upload_to='avatar/', blank=True, null=True)
     big_image = models.ImageField(upload_to='background/', blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
         return self.user

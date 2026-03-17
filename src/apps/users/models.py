@@ -20,7 +20,7 @@ class User(models.Model):
     password = models.CharField(max_length=155)   #<<<---sha256
     data_of_birth = models.DateField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True) 
 
     def __str__(self):
         return self.username
